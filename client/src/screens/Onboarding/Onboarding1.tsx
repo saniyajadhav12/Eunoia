@@ -15,7 +15,7 @@ const Onboarding1 = () => {
   const handleNext = () => {
     if (buddyName.trim()) {
       // TODO: save buddy name in context or storage
-      navigation.navigate('Home'); // change later to next onboarding screen
+      navigation.navigate('Onboarding2'); // change later to next onboarding screen
     }
   };
 
