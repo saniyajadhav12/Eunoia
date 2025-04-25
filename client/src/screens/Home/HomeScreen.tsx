@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, FlatList} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {View, Text, TouchableOpacity, FlatList, Animated} from 'react-native';
 import styles from './HomeScreen.styles';
 import {useBuddy} from '../../context/BuddyContext';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SnapJournalModal from '../../components/SnapJournalModal/SnapJournalModal';
-import { saveMood } from '../../utils/moodStorage';
+import { saveMood, getMoodLog } from '../../utils/moodStorage';
+import { useEffect } from 'react';
 
 const moodOptions = ['😊', '😐', '😔', '😡', '🥳'];
 
@@ -13,6 +14,38 @@ const HomeScreen = () => {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [showJournal, setShowJournal] = useState(false);
   const [entry, setEntry] = useState('');
+  const [todayMood, setTodayMood] = useState<string | null>(null);
+  const [latestMood, setLatestMood] = useState<string | null>(null);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    getMoodLog().then((log) => {
+      const today = new Date().toISOString().split('T')[0]; // 'YYYY-MM-DD'
+      const todayEntry = log.find((entry) =>
+        entry.timestamp.startsWith(today)
+      );
+      if (todayEntry) {
+        setTodayMood(todayEntry.mood);
+        fadeIn();
+      }
+    });
+  }, []);
+  
+  const handleMoodSelect = (mood: string) => {
+    setSelectedMood(mood);
+    saveMood(mood).then(() => {
+      setTodayMood(mood); // Update immediately
+      fadeIn();
+    });
+  };
+
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 400,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,10 +60,13 @@ const HomeScreen = () => {
           contentContainerStyle={styles.moodList}
           renderItem={({item}) => (
             <TouchableOpacity
-              onPress={() => {
-                setSelectedMood(item);
-                saveMood(item);
-              }}
+              onPress={() => handleMoodSelect(item)}
+              // onPress={() => {
+              //   setSelectedMood(item);
+              //   saveMood(item).then(() => {
+              //     setLatestMood(item); // show immediately
+              //   });
+              // }}
               style={[
                 styles.moodItem,
                 selectedMood === item && styles.selectedMood,
@@ -41,6 +77,18 @@ const HomeScreen = () => {
           showsHorizontalScrollIndicator={false}
         />
       </View>
+
+      {/* {latestMood && (
+        <Text style={styles.sectionTitle}>
+          Today's Mood: {latestMood}
+        </Text>
+      )} */}
+
+      {todayMood && (
+        <Animated.View style={{ opacity: fadeAnim }}>
+          <Text style={styles.sectionTitle}>Today's Mood: {todayMood}</Text>
+        </Animated.View>
+      )}
 
       <TouchableOpacity
         onPress={() => setShowJournal(true)}

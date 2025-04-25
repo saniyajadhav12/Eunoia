@@ -45,6 +45,12 @@ const styles = StyleSheet.create({
   moodEmoji: {
     fontSize: 22,
   },
+  todayMood: {
+    fontSize: fonts.sizes.md,
+    marginBottom: spacing.md,
+    color: colors.text,
+    fontWeight: '600',
+  },  
   placeholderBox: {
     backgroundColor: colors.cardBackground,
     padding: spacing.lg,
