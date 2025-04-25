@@ -12,7 +12,7 @@ type Props = {
 
 const SnapJournalModal = ({ visible, onClose, entry, setEntry, onSave }: Props) => {
   return (
-    <Modal visible={visible} animationType="slide" transparent>
+    <Modal visible={visible} animationType="fade" transparent>
       <View style={styles.overlay}>
         <View style={styles.modal}>
           <Text style={styles.title}>New Journal Entry</Text>
