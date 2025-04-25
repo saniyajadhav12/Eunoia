@@ -5,16 +5,19 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/RootNavigator';
 import styles from './Onboarding1.styles';
 import colors from '../../theme/colors';
+import { useBuddy } from '../../context/BuddyContext';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Onboarding1'>;
 
 const Onboarding1 = () => {
   const navigation = useNavigation<NavigationProp>();
   const [buddyName, setBuddyName] = useState('');
+  const { setBuddy } = useBuddy();
+
 
   const handleNext = () => {
     if (buddyName.trim()) {
-      // TODO: save buddy name in context or storage
+      setBuddy({ name: buddyName });
       navigation.navigate('Onboarding2'); // change later to next onboarding screen
     }
   };

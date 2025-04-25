@@ -6,6 +6,7 @@ import { RootStackParamList } from '../../navigation/RootNavigator';
 import styles from './Onboarding2.styles';
 import ToneCard from '../../components/ToneCard/ToneCard';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useBuddy } from '../../context/BuddyContext';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Onboarding2'>;
 
@@ -14,10 +15,11 @@ const tones = ['Calm', 'Playful', 'Supportive', 'Motivational'];
 const Onboarding2 = () => {
   const navigation = useNavigation<NavigationProp>();
   const [selectedTone, setSelectedTone] = useState<string | null>(null);
+  const { setBuddy } = useBuddy();
 
   const handleNext = () => {
     if (selectedTone) {
-      // TODO: Save tone to context or storage
+      setBuddy({ tone: selectedTone });
       navigation.navigate('Onboarding3'); // Update to Onboarding3 when ready
     }
   };
