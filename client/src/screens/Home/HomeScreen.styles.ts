@@ -51,9 +51,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: spacing.md,
   },
-  firstBox: {
-    marginTop: 0,
-  },
   placeholderTitle: {
     fontSize: fonts.sizes.lg,
     fontWeight: 'bold',

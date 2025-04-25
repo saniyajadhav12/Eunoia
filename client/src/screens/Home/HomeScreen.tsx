@@ -3,12 +3,15 @@ import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import styles from './HomeScreen.styles';
 import { useBuddy } from '../../context/BuddyContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import SnapJournalModal from '../../components/SnapJournalModal/SnapJournalModal';
 
 const moodOptions = ['😊', '😐', '😔', '😡', '🥳'];
 
 const HomeScreen = () => {
   const { buddy } = useBuddy();
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
+  const [showJournal, setShowJournal] = useState(false);
+  const [entry, setEntry] = useState('');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -36,15 +39,28 @@ const HomeScreen = () => {
         />
        </View>
 
-      <View style={[styles.placeholderBox, styles.firstBox]}>
+       <TouchableOpacity onPress={() => setShowJournal(true)} style={styles.placeholderBox}>
         <Text style={styles.placeholderTitle}>📝 SnapJournal</Text>
         <Text style={styles.placeholderSubtitle}>Quick journal entry shortcut</Text>
-      </View>
+      </TouchableOpacity>
 
       <View style={styles.placeholderBox}>
         <Text style={styles.placeholderTitle}>🔔 Reminders</Text>
         <Text style={styles.placeholderSubtitle}>Hydration, sleep, affirmations...</Text>
       </View>
+
+      <SnapJournalModal
+        visible={showJournal}
+        onClose={() => setShowJournal(false)}
+        entry={entry}
+        setEntry={setEntry}
+        onSave={() => {
+          console.log('Journal Entry:', entry); // 🔐 Later: save to local or backend
+          setEntry('');
+          setShowJournal(false);
+        }}
+      />
+
     </SafeAreaView>
   );
 };
