@@ -61,6 +61,26 @@ const styles = StyleSheet.create({
     color: colors.grey,
     marginTop: spacing.xs,
   },
+  reminderBox: {
+    backgroundColor: colors.cardBackground,
+    padding: spacing.lg,
+    borderRadius: 12,
+    marginBottom: spacing.md,
+  },
+  reminderItem: {
+    fontSize: fonts.sizes.md,
+    color: colors.text,
+    marginBottom: spacing.xs,
+  },
+  viewAllButton: {
+    marginTop: spacing.sm,
+    alignSelf: 'flex-start',
+  },
+  viewAllText: {
+    color: colors.primary,
+    fontWeight: 'bold',
+  },
+  
 });
 
 export default styles;
