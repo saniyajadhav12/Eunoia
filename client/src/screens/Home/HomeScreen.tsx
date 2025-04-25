@@ -15,25 +15,28 @@ const HomeScreen = () => {
       <Text style={styles.greeting}>Hi {buddy.name || 'Buddy'} 👋</Text>
 
       <Text style={styles.sectionTitle}>How are you feeling today?</Text>
-      <FlatList
-        // horizontal
-        data={moodOptions}
-        keyExtractor={(item) => item}
-        contentContainerStyle={styles.moodList}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => setSelectedMood(item)}
-            style={[
-              styles.moodItem,
-              selectedMood === item && styles.selectedMood,
-            ]}
-          >
-            <Text style={styles.moodEmoji}>{item}</Text>
-          </TouchableOpacity>
-        )}
-      />
+      <View style={styles.moodContainer}>
+        <FlatList
+            horizontal
+            data={moodOptions}
+            keyExtractor={(item) => item}
+            contentContainerStyle={styles.moodList}
+            renderItem={({ item }) => (
+            <TouchableOpacity
+                onPress={() => setSelectedMood(item)}
+                style={[
+                styles.moodItem,
+                selectedMood === item && styles.selectedMood,
+                ]}
+            >
+                <Text style={styles.moodEmoji}>{item}</Text>
+            </TouchableOpacity>
+            )}
+            showsHorizontalScrollIndicator={false}
+        />
+       </View>
 
-      <View style={styles.placeholderBox}>
+      <View style={[styles.placeholderBox, styles.firstBox]}>
         <Text style={styles.placeholderTitle}>📝 SnapJournal</Text>
         <Text style={styles.placeholderSubtitle}>Quick journal entry shortcut</Text>
       </View>

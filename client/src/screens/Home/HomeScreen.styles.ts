@@ -21,13 +21,17 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
     color: colors.text,
   },
+  moodContainer: {
+    flexShrink: 1, 
+    marginBottom: spacing.sm, 
+  },  
   moodList: {
     gap: spacing.sm,
-    marginBottom: spacing.lg,
+    marginBottom: 0,
   },
   moodItem: {
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
+    width: 58,
+    height: 50,
     borderRadius: 12,
     backgroundColor: colors.cardBackground,
     marginRight: spacing.sm,
@@ -39,13 +43,16 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
   },
   moodEmoji: {
-    fontSize: 24,
+    fontSize: 22,
   },
   placeholderBox: {
     backgroundColor: colors.cardBackground,
     padding: spacing.lg,
     borderRadius: 12,
     marginBottom: spacing.md,
+  },
+  firstBox: {
+    marginTop: 0,
   },
   placeholderTitle: {
     fontSize: fonts.sizes.lg,
