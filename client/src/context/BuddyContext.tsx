@@ -4,6 +4,7 @@ type BuddyData = {
   name: string;
   tone: string;
   lifestyle: string;
+  reminderStyle: string;
 };
 
 type BuddyContextType = {
@@ -15,6 +16,7 @@ const defaultBuddy: BuddyData = {
   name: '',
   tone: '',
   lifestyle: '',
+  reminderStyle: '',
 };
 
 const BuddyContext = createContext<BuddyContextType>({
