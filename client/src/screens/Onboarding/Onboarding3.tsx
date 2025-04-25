@@ -3,46 +3,48 @@ import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/RootNavigator';
-import styles from './Onboarding2.styles';
+import { useBuddy } from '../../context/BuddyContext';
+import styles from './Onboarding3.styles';
 import ToneCard from '../../components/ToneCard/ToneCard';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Onboarding2'>;
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Onboarding3'>;
 
-const tones = ['Calm', 'Playful', 'Supportive', 'Motivational'];
+const lifestyles = ['Structured', 'Flexible', 'Spontaneous'];
 
-const Onboarding2 = () => {
+const Onboarding3 = () => {
   const navigation = useNavigation<NavigationProp>();
-  const [selectedTone, setSelectedTone] = useState<string | null>(null);
+  const { setBuddy } = useBuddy();
+  const [selectedLifestyle, setSelectedLifestyle] = useState<string | null>(null);
 
   const handleNext = () => {
-    if (selectedTone) {
-      // TODO: Save tone to context or storage
-      navigation.navigate('Onboarding3'); // Update to Onboarding3 when ready
+    if (selectedLifestyle) {
+      setBuddy({ lifestyle: selectedLifestyle });
+      navigation.navigate('Home'); // Change to Onboarding4 later
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>How do you want your buddy to sound?</Text>
+      <Text style={styles.title}>What best describes your lifestyle?</Text>
 
       <FlatList
-        data={tones}
+        data={lifestyles}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <ToneCard
             label={item}
-            selected={selectedTone === item}
-            onPress={() => setSelectedTone(item)}
+            selected={selectedLifestyle === item}
+            onPress={() => setSelectedLifestyle(item)}
           />
         )}
         contentContainerStyle={styles.cardContainer}
       />
 
       <TouchableOpacity
-        style={[styles.button, !selectedTone && styles.disabled]}
+        style={[styles.button, !selectedLifestyle && styles.disabled]}
         onPress={handleNext}
-        disabled={!selectedTone}
+        disabled={!selectedLifestyle}
       >
         <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
@@ -50,4 +52,4 @@ const Onboarding2 = () => {
   );
 };
 
-export default Onboarding2;
+export default Onboarding3;
