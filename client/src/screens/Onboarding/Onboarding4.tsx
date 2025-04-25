@@ -20,7 +20,8 @@ const Onboarding4 = () => {
   const handleNext = () => {
     if (selectedReminder) {
       setBuddy({ reminderStyle: selectedReminder }); // If needed, add `reminderStyle` to BuddyContext type
-      navigation.navigate('Debug'); // or Onboarding5 if you plan more
+      // navigation.navigate('Debug'); // or Onboarding5 if you plan more
+      navigation.navigate('Home'); // or Onboarding5 if you plan more
     }
   };
 

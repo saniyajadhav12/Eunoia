@@ -7,6 +7,7 @@ import Onboarding2 from '../screens/Onboarding/Onboarding2';
 import Onboarding3 from '../screens/Onboarding/Onboarding3';
 import Onboarding4 from '../screens/Onboarding/Onboarding4';
 import DebugScreen from '../screens/Debug/DebugScreen';
+import HomeScreen from '../screens/Home/HomeScreen';
 
 export type RootStackParamList = {
   Onboarding1: undefined;
@@ -28,6 +29,7 @@ export default function RootNavigator() {
         <Stack.Screen name="Onboarding3" component={Onboarding3} />
         <Stack.Screen name="Onboarding4" component={Onboarding4} />
         <Stack.Screen name="Debug" component={DebugScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
