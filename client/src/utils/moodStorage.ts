@@ -27,3 +27,31 @@ export const getMoodLog = async (): Promise<MoodEntry[]> => {
   console.log('📦 Reading raw from AsyncStorage:', stored);
   return stored ? JSON.parse(stored) : [];
 };
+
+export const getLast7DaysMood = async (): Promise<{ date: string; mood: string }[]> => {
+  const log = await getMoodLog();
+  const moodMap = new Map<string, string>();
+
+  log.forEach(({ mood, timestamp }) => {
+    const date = new Date(timestamp).toISOString().split('T')[0]; // YYYY-MM-DD
+    if (!moodMap.has(date)) {
+      moodMap.set(date, mood); // first mood of the day
+    }
+  });
+
+  const today = new Date();
+  const result: { date: string; mood: string }[] = [];
+
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    result.push({
+      date: dateStr,
+      mood: moodMap.get(dateStr) || '',
+    });
+  }
+
+  return result;
+};
+

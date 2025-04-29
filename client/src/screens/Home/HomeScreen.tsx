@@ -4,8 +4,10 @@ import styles from './HomeScreen.styles';
 import {useBuddy} from '../../context/BuddyContext';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SnapJournalModal from '../../components/SnapJournalModal/SnapJournalModal';
-import { saveMood, getMoodLog } from '../../utils/moodStorage';
-import { useEffect } from 'react';
+import {saveMood, getMoodLog} from '../../utils/moodStorage';
+import {useEffect} from 'react';
+import {getLast7DaysMood} from '../../utils/moodStorage';
+import MoodTimeline from '../../components/MoodTimeline/MoodTimeline';
 
 const moodOptions = ['😊', '😐', '😔', '😡', '🥳'];
 
@@ -17,25 +19,26 @@ const HomeScreen = () => {
   const [todayMood, setTodayMood] = useState<string | null>(null);
   const [latestMood, setLatestMood] = useState<string | null>(null);
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [moodWeek, setMoodWeek] = useState<{date: string; mood: string}[]>([]);
 
   useEffect(() => {
-    getMoodLog().then((log) => {
+    getMoodLog().then(log => {
       const today = new Date().toISOString().split('T')[0]; // 'YYYY-MM-DD'
-      const todayEntry = log.find((entry) =>
-        entry.timestamp.startsWith(today)
-      );
+      const todayEntry = log.find(entry => entry.timestamp.startsWith(today));
       if (todayEntry) {
         setTodayMood(todayEntry.mood);
         fadeIn();
       }
     });
+    getLast7DaysMood().then(setMoodWeek);
   }, []);
-  
+
   const handleMoodSelect = (mood: string) => {
     setSelectedMood(mood);
     saveMood(mood).then(() => {
       setTodayMood(mood); // Update immediately
       fadeIn();
+      getLast7DaysMood().then(setMoodWeek);
     });
   };
 
@@ -85,10 +88,12 @@ const HomeScreen = () => {
       )} */}
 
       {todayMood && (
-        <Animated.View style={{ opacity: fadeAnim }}>
+        <Animated.View style={{opacity: fadeAnim}}>
           <Text style={styles.sectionTitle}>Today's Mood: {todayMood}</Text>
         </Animated.View>
       )}
+
+      {moodWeek.length > 0 && <MoodTimeline data={moodWeek} />}
 
       <TouchableOpacity
         onPress={() => setShowJournal(true)}
