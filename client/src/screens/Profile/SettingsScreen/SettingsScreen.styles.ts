@@ -5,25 +5,42 @@ import fonts from '../../../theme/fonts';
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
     backgroundColor: colors.background,
     padding: spacing.lg,
-    justifyContent: 'center',
   },
-  title: {
-    fontSize: fonts.sizes.xl,
-    color: colors.primary,
+  sectionTitle: {
+    fontSize: fonts.sizes.md,
     fontWeight: 'bold',
-    marginBottom: spacing.lg,
+    color: colors.text,
+    marginTop: spacing.lg,
+    marginBottom: spacing.sm,
+  },
+  settingRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.sm,
+    backgroundColor: colors.cardBackground,
+    borderRadius: 12,
+    marginBottom: spacing.sm,
   },
   label: {
-    fontSize: fonts.sizes.sm,
-    color: colors.grey,
-    marginTop: spacing.md,
-  },
-  value: {
     fontSize: fonts.sizes.md,
     color: colors.text,
+  },
+  logoutButton: {
+    marginTop: spacing.xl,
+    paddingVertical: spacing.md,
+    backgroundColor: '#FFE4E6',
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  logoutText: {
+    fontSize: fonts.sizes.md,
+    fontWeight: '600',
+    color: '#DC2626',
   },
 });
 

@@ -1,26 +1,40 @@
-import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { useBuddy } from '../../../context/BuddyContext';
+import React, { useState } from 'react';
+import { View, Text, Switch, TouchableOpacity, Alert } from 'react-native';
 import styles from './SettingsScreen.styles';
 
 const SettingsScreen = () => {
-  const { buddy } = useBuddy();
+  const [remindersEnabled, setRemindersEnabled] = useState(true);
+  const [darkModeEnabled, setDarkModeEnabled] = useState(false);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Buddy Debug Info</Text>
-      <Text style={styles.label}>Name:</Text>
-      <Text style={styles.value}>{buddy.name}</Text>
+    <View style={styles.container}>
+      <Text style={styles.sectionTitle}>Preferences</Text>
 
-      <Text style={styles.label}>Tone:</Text>
-      <Text style={styles.value}>{buddy.tone}</Text>
+      <View style={styles.settingRow}>
+        <Text style={styles.label}>Reminders</Text>
+        <Switch
+          value={remindersEnabled}
+          onValueChange={setRemindersEnabled}
+        />
+      </View>
 
-      <Text style={styles.label}>Lifestyle:</Text>
-      <Text style={styles.value}>{buddy.lifestyle}</Text>
+      <View style={styles.settingRow}>
+        <Text style={styles.label}>Dark Mode</Text>
+        <Switch
+          value={darkModeEnabled}
+          onValueChange={setDarkModeEnabled}
+        />
+      </View>
 
-      <Text style={styles.label}>Reminder Style:</Text>
-      <Text style={styles.value}>{buddy.reminderStyle}</Text>
-    </ScrollView>
+      <Text style={styles.sectionTitle}>Account</Text>
+
+      <TouchableOpacity
+        onPress={() => Alert.alert('Logout', 'Logout functionality coming soon!')}
+        style={styles.logoutButton}
+      >
+        <Text style={styles.logoutText}>Log Out</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
