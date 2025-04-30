@@ -1,6 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import styles from './InsightsScreen.styles';
+import { PieChart } from 'react-native-chart-kit';
+
+const screenWidth = Dimensions.get('window').width;
+
+const dummyData = [
+  { name: '😊', mood: 'Happy', count: 4, color: '#A78BFA', legendFontColor: '#333', legendFontSize: 14 },
+  { name: '😐', mood: 'Neutral', count: 2, color: '#FBBF24', legendFontColor: '#333', legendFontSize: 14 },
+  { name: '😔', mood: 'Sad', count: 1, color: '#60A5FA', legendFontColor: '#333', legendFontSize: 14 },
+];
+
+const chartData = dummyData.map((item) => ({
+  name: item.mood,
+  population: item.count,
+  color: item.color,
+  legendFontColor: item.legendFontColor,
+  legendFontSize: item.legendFontSize,
+}));
 
 const InsightsScreen = () => {
   return (
@@ -9,9 +26,25 @@ const InsightsScreen = () => {
       <Text style={styles.subtitle}>Here's a quick look at your recent mood trends.</Text>
 
       {/* Chart Placeholder */}
-      <View style={styles.chartBox}>
-        <Text style={styles.chartText}>📊 Mood Chart Coming Soon</Text>
-      </View>
+      <Text style={styles.title}>Your Mood Insights</Text>
+      <Text style={styles.subtitle}>Last 7 Days</Text>
+
+      <PieChart
+        data={chartData}
+        width={screenWidth - 32}
+        height={220}
+        chartConfig={{
+          backgroundColor: '#fff',
+          backgroundGradientFrom: '#fff',
+          backgroundGradientTo: '#fff',
+          color: () => '#555',
+        }}
+        accessor={'population'}
+        backgroundColor={'transparent'}
+        paddingLeft={'16'}
+        center={[0, 0]}
+        absolute
+      />
 
       {/* Summary Boxes */}
       <View style={styles.summaryRow}>
