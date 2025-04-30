@@ -20,13 +20,13 @@ const MainTabs = () => {
           return <Ionicons name={icons[route.name]} size={size} color={color} />;
         },
         headerShown: false,
-        tabBarActiveTintColor: '#B497FF', // lavender
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: '#A78BFA', // lavender
+        tabBarInactiveTintColor: '#999',
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Explore" component={ExploreScreen} />
-      <Tab.Screen name="Profile" component={ProfileStackNavigator} />
+      <Tab.Screen name="Profile" component={ProfileStackNavigator} options={{ headerShown: false }}/>
     </Tab.Navigator>
   );
 };

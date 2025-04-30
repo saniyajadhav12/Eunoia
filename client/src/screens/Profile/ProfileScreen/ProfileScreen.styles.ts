@@ -5,25 +5,36 @@ import fonts from '../../../theme/fonts';
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    backgroundColor: colors.background,
     padding: spacing.lg,
+    backgroundColor: colors.background,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: spacing.xl,
+  },
+  avatar: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
     justifyContent: 'center',
+    marginRight: spacing.md,
   },
-  title: {
-    fontSize: fonts.sizes.xl,
-    color: colors.primary,
+  avatarText: {
+    fontSize: 28,
+    color: '#fff',
+    fontWeight: '600',
+  },
+  name: {
+    fontSize: fonts.sizes.lg,
     fontWeight: 'bold',
-    marginBottom: spacing.lg,
+    color: colors.text,
   },
-  label: {
+  email: {
     fontSize: fonts.sizes.sm,
     color: colors.grey,
-    marginTop: spacing.md,
-  },
-  value: {
-    fontSize: fonts.sizes.md,
-    color: colors.text,
   },
 });
 

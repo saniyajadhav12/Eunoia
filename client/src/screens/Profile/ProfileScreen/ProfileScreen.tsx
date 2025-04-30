@@ -1,25 +1,32 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { useBuddy } from '../../../context/BuddyContext';
 import styles from './ProfileScreen.styles';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ProfileStackParamList } from '../../../navigation/ProfileStackNavigator';
+import SectionItem from '../../../components/SectionItem/SectionItem';
 
 const ProfileScreen = () => {
-  const { buddy } = useBuddy();
+  const navigation = useNavigation<NativeStackNavigationProp<ProfileStackParamList>>();
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Buddy Debug Info</Text>
-      <Text style={styles.label}>Name:</Text>
-      <Text style={styles.value}>{buddy.name}</Text>
+      {/* Top Greeting Section */}
+      <View style={styles.header}>
+        <View style={styles.avatar}>
+          <Text style={styles.avatarText}>L</Text>
+        </View>
+        <View>
+          <Text style={styles.name}>Hi Lumi 👋</Text>
+          <Text style={styles.email}>you@eunoia.app</Text>
+        </View>
+      </View>
 
-      <Text style={styles.label}>Tone:</Text>
-      <Text style={styles.value}>{buddy.tone}</Text>
-
-      <Text style={styles.label}>Lifestyle:</Text>
-      <Text style={styles.value}>{buddy.lifestyle}</Text>
-
-      <Text style={styles.label}>Reminder Style:</Text>
-      <Text style={styles.value}>{buddy.reminderStyle}</Text>
+      {/* Section List */}
+      <SectionItem label="Mood History" icon="calendar" onPress={() => navigation.navigate('MoodHistory')} />
+      <SectionItem label="Insights" icon="bar-chart" onPress={() => navigation.navigate('Insights')} />
+      <SectionItem label="Settings" icon="settings" onPress={() => navigation.navigate('Settings')} />
+      <SectionItem label="About" icon="information-circle-sharp" onPress={() => navigation.navigate('About')} />
     </ScrollView>
   );
 };
