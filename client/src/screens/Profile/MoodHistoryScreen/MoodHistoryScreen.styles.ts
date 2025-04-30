@@ -5,25 +5,32 @@ import fonts from '../../../theme/fonts';
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
     backgroundColor: colors.background,
     padding: spacing.lg,
-    justifyContent: 'center',
   },
-  title: {
-    fontSize: fonts.sizes.xl,
-    color: colors.primary,
-    fontWeight: 'bold',
-    marginBottom: spacing.lg,
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.sm,
+    marginBottom: spacing.sm,
+    borderRadius: 10,
+    backgroundColor: colors.cardBackground,
   },
-  label: {
+  mood: {
+    fontSize: 24,
+  },
+  date: {
     fontSize: fonts.sizes.sm,
     color: colors.grey,
-    marginTop: spacing.md,
+    alignSelf: 'center',
   },
-  value: {
+  empty: {
     fontSize: fonts.sizes.md,
-    color: colors.text,
+    textAlign: 'center',
+    color: colors.grey,
+    marginTop: spacing.xl,
   },
 });
 

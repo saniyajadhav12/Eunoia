@@ -1,26 +1,42 @@
-import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { useBuddy } from '../../../context/BuddyContext';
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList } from 'react-native';
 import styles from './MoodHistoryScreen.styles';
+import { getMoodLog, MoodEntry } from '../../../utils/moodStorage';
 
 const MoodHistoryScreen = () => {
-  const { buddy } = useBuddy();
+  const [log, setLog] = useState<MoodEntry[]>([]);
+
+  useEffect(() => {
+    getMoodLog().then(setLog);
+  }, []);
+
+  const renderItem = ({ item }: { item: MoodEntry }) => {
+    const date = new Date(item.timestamp).toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+    });
+
+    return (
+      <View style={styles.item}>
+        <Text style={styles.mood}>{item.mood}</Text>
+        <Text style={styles.date}>{date}</Text>
+      </View>
+    );
+  };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Buddy Debug Info</Text>
-      <Text style={styles.label}>Name:</Text>
-      <Text style={styles.value}>{buddy.name}</Text>
-
-      <Text style={styles.label}>Tone:</Text>
-      <Text style={styles.value}>{buddy.tone}</Text>
-
-      <Text style={styles.label}>Lifestyle:</Text>
-      <Text style={styles.value}>{buddy.lifestyle}</Text>
-
-      <Text style={styles.label}>Reminder Style:</Text>
-      <Text style={styles.value}>{buddy.reminderStyle}</Text>
-    </ScrollView>
+    <View style={styles.container}>
+      {log.length === 0 ? (
+        <Text style={styles.empty}>No moods logged yet.</Text>
+      ) : (
+        <FlatList
+          data={log}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={renderItem}
+        />
+      )}
+    </View>
   );
 };
 
