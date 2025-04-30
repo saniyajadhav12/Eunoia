@@ -1,26 +1,29 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { useBuddy } from '../../../context/BuddyContext';
+import { View, Text, Linking, TouchableOpacity } from 'react-native';
 import styles from './AboutScreen.styles';
 
 const AboutScreen = () => {
-  const { buddy } = useBuddy();
-
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Buddy Debug Info</Text>
-      <Text style={styles.label}>Name:</Text>
-      <Text style={styles.value}>{buddy.name}</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>About Eunoia</Text>
+      <Text style={styles.paragraph}>
+        Eunoia is your mindful companion — designed to help you track your mood, reflect through journaling,
+        and build self-care habits.
+      </Text>
 
-      <Text style={styles.label}>Tone:</Text>
-      <Text style={styles.value}>{buddy.tone}</Text>
+      <Text style={styles.paragraph}>
+        Version: <Text style={styles.bold}>v1.0.0</Text>
+      </Text>
 
-      <Text style={styles.label}>Lifestyle:</Text>
-      <Text style={styles.value}>{buddy.lifestyle}</Text>
+      <Text style={styles.sectionTitle}>Credits</Text>
+      <Text style={styles.paragraph}>💻 Developed with ❤️ by Saniya Jadhav</Text>
 
-      <Text style={styles.label}>Reminder Style:</Text>
-      <Text style={styles.value}>{buddy.reminderStyle}</Text>
-    </ScrollView>
+      <TouchableOpacity
+        onPress={() => Linking.openURL('https://github.com/saniyajadhav12')}
+      >
+        <Text style={styles.link}>GitHub: @saniyajadhav12</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

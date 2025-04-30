@@ -5,25 +5,37 @@ import fonts from '../../../theme/fonts';
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    backgroundColor: colors.background,
+    flex: 1,
     padding: spacing.lg,
-    justifyContent: 'center',
+    backgroundColor: colors.background,
   },
   title: {
-    fontSize: fonts.sizes.xl,
-    color: colors.primary,
+    fontSize: fonts.sizes.lg,
     fontWeight: 'bold',
-    marginBottom: spacing.lg,
+    color: colors.text,
+    marginBottom: spacing.md,
   },
-  label: {
+  sectionTitle: {
+    fontSize: fonts.sizes.md,
+    fontWeight: '600',
+    marginTop: spacing.xl,
+    marginBottom: spacing.sm,
+    color: colors.text,
+  },
+  paragraph: {
     fontSize: fonts.sizes.sm,
     color: colors.grey,
-    marginTop: spacing.md,
+    marginBottom: spacing.md,
+    lineHeight: 20,
   },
-  value: {
-    fontSize: fonts.sizes.md,
+  bold: {
+    fontWeight: 'bold',
     color: colors.text,
+  },
+  link: {
+    color: colors.primary,
+    fontWeight: '600',
+    marginTop: spacing.sm,
   },
 });
 
