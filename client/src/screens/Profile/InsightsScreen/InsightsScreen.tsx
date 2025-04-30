@@ -1,26 +1,30 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { useBuddy } from '../../../context/BuddyContext';
+import { View, Text } from 'react-native';
 import styles from './InsightsScreen.styles';
 
 const InsightsScreen = () => {
-  const { buddy } = useBuddy();
-
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Buddy Debug Info</Text>
-      <Text style={styles.label}>Name:</Text>
-      <Text style={styles.value}>{buddy.name}</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Your Mood Insights</Text>
+      <Text style={styles.subtitle}>Here's a quick look at your recent mood trends.</Text>
 
-      <Text style={styles.label}>Tone:</Text>
-      <Text style={styles.value}>{buddy.tone}</Text>
+      {/* Chart Placeholder */}
+      <View style={styles.chartBox}>
+        <Text style={styles.chartText}>📊 Mood Chart Coming Soon</Text>
+      </View>
 
-      <Text style={styles.label}>Lifestyle:</Text>
-      <Text style={styles.value}>{buddy.lifestyle}</Text>
-
-      <Text style={styles.label}>Reminder Style:</Text>
-      <Text style={styles.value}>{buddy.reminderStyle}</Text>
-    </ScrollView>
+      {/* Summary Boxes */}
+      <View style={styles.summaryRow}>
+        <View style={styles.summaryBox}>
+          <Text style={styles.summaryLabel}>Most Frequent</Text>
+          <Text style={styles.summaryValue}>😊</Text>
+        </View>
+        <View style={styles.summaryBox}>
+          <Text style={styles.summaryLabel}>Streak</Text>
+          <Text style={styles.summaryValue}>3 days</Text>
+        </View>
+      </View>
+    </View>
   );
 };
 
