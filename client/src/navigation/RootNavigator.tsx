@@ -7,7 +7,8 @@ import Onboarding2 from '../screens/Onboarding/Onboarding2';
 import Onboarding3 from '../screens/Onboarding/Onboarding3';
 import Onboarding4 from '../screens/Onboarding/Onboarding4';
 import DebugScreen from '../screens/Debug/DebugScreen';
-import HomeScreen from '../screens/Home/HomeScreen';
+// import HomeScreen from '../screens/Home/HomeScreen';
+import MainTabs from './MainTabs';
 
 export type RootStackParamList = {
   Onboarding1: undefined;
@@ -15,7 +16,8 @@ export type RootStackParamList = {
   Onboarding3: undefined;
   Onboarding4: undefined;
   Debug: undefined;
-  Home: undefined; // placeholder
+  // Home: undefined;
+  MainTabs: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -29,7 +31,8 @@ export default function RootNavigator() {
         <Stack.Screen name="Onboarding3" component={Onboarding3} />
         <Stack.Screen name="Onboarding4" component={Onboarding4} />
         <Stack.Screen name="Debug" component={DebugScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+        <Stack.Screen name="MainTabs" component={MainTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
