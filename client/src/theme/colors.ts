@@ -12,6 +12,7 @@ const colors = {
     white: '#FFFFFF',
     black: '#000000',
     borderLight: '#E5E7EB',
+    textMuted: '#6B7280',
   };
   
   export default colors;

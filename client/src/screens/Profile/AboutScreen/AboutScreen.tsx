@@ -1,28 +1,31 @@
 import React from 'react';
-import { View, Text, Linking, TouchableOpacity } from 'react-native';
+import { View, Text, Linking } from 'react-native';
 import styles from './AboutScreen.styles';
 
 const AboutScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>About Eunoia</Text>
-      <Text style={styles.paragraph}>
-        Eunoia is your mindful companion — designed to help you track your mood, reflect through journaling,
-        and build self-care habits.
+      <Text style={styles.appName}>Eunoia 🌱</Text>
+      <Text style={styles.version}>Version 1.0.0</Text>
+
+      <Text style={styles.description}>
+        Eunoia is your friendly wellness companion, helping you track moods, set reminders, and grow healthier habits.
       </Text>
 
-      <Text style={styles.paragraph}>
-        Version: <Text style={styles.bold}>v1.0.0</Text>
-      </Text>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Credits</Text>
+        <Text style={styles.sectionContent}>Developed by Saniya Jadhav</Text>
+      </View>
 
-      <Text style={styles.sectionTitle}>Credits</Text>
-      <Text style={styles.paragraph}>💻 Developed with ❤️ by Saniya Jadhav</Text>
-
-      <TouchableOpacity
-        onPress={() => Linking.openURL('https://github.com/saniyajadhav12')}
-      >
-        <Text style={styles.link}>GitHub: @saniyajadhav12</Text>
-      </TouchableOpacity>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Contact</Text>
+        <Text 
+          style={styles.link} 
+          onPress={() => Linking.openURL('mailto:saniya@example.com')}
+        >
+          saniya@example.com
+        </Text>
+      </View>
     </View>
   );
 };
