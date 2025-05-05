@@ -11,7 +11,7 @@ const TipCard = ({emoji, title}: Props) => {
   return (
     <TouchableOpacity activeOpacity={0.8} style={styles.card}>
       <Text style={styles.emoji}>{emoji}</Text>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
   );
 };

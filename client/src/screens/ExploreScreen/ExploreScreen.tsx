@@ -18,6 +18,14 @@ const ExploreScreen = () => {
           </Text>
         </View>
 
+        {/* Affirmation */}
+        <Text style={styles.sectionTitle}>💜 Daily Affirmation</Text>
+        <View style={styles.affirmationBox}>
+          <Text style={styles.affirmationText}>
+            "You are doing your best and that's enough."
+          </Text>
+        </View>
+
         {/* Mood Boosters */}
         <Text style={styles.sectionTitle}>🚀 Mood Boosters</Text>
         <ScrollView
@@ -49,6 +57,18 @@ const ExploreScreen = () => {
           <TipCard emoji="😊" title="What made you smile today?" />
           <TipCard emoji="🎯" title="One small goal for tomorrow?" />
         </ScrollView>
+
+        {/* Soothing Sounds */}
+        <Text style={styles.sectionTitle}>🎶 Soothing Sounds</Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.horizontalList}>
+          <TipCard emoji="🌊" title="Ocean Waves" />
+          <TipCard emoji="🌿" title="Forest Ambience" />
+          <TipCard emoji="🔥" title="Campfire Crackle" />
+        </ScrollView>
+
       </ScrollView>
     </SafeAreaView>
   );

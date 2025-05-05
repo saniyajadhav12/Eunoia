@@ -46,6 +46,21 @@ const styles = StyleSheet.create({
   horizontalList: {
     marginBottom: spacing.md,
   },
+  affirmationBox: {
+    backgroundColor: colors.cardBackground,
+    padding: spacing.md,
+    borderRadius: 12,
+    borderColor: colors.borderLight,
+    borderWidth: 1,
+    marginBottom: spacing.md,
+  },
+  affirmationText: {
+      fontSize: fonts.sizes.sm,
+      color: colors.primary,
+      fontStyle: 'italic',
+      textAlign: 'center',
+  },
+
 });
 
 export default styles;

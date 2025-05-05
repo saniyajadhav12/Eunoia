@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     marginBottom: spacing.xs,
   },
-  text: {
+  title: {
     fontSize: fonts.sizes.sm,
     color: colors.text,
   },
