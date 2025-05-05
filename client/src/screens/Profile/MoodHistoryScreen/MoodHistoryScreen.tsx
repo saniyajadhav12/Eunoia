@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import styles from './MoodHistoryScreen.styles';
 import { getMoodLog, MoodEntry } from '../../../utils/moodStorage';
+import MoodItem from '../../../components/MoodItem/MoodItem';
 
 const MoodHistoryScreen = () => {
   const [log, setLog] = useState<MoodEntry[]>([]);
@@ -17,12 +18,7 @@ const MoodHistoryScreen = () => {
       day: 'numeric',
     });
 
-    return (
-      <View style={styles.item}>
-        <Text style={styles.mood}>{item.mood}</Text>
-        <Text style={styles.date}>{date}</Text>
-      </View>
-    );
+    return <MoodItem mood={item.mood} date={date} />;
   };
 
   return (

@@ -32,6 +32,11 @@ const styles = StyleSheet.create({
     color: colors.grey,
     marginTop: spacing.xl,
   },
+  title: {
+    fontSize: fonts.sizes.lg,
+    fontWeight: 'bold',
+    marginBottom: spacing.md,
+  },
 });
 
 export default styles;

@@ -11,6 +11,7 @@ const colors = {
     error: '#EF476F',
     white: '#FFFFFF',
     black: '#000000',
+    borderLight: '#E5E7EB',
   };
   
   export default colors;

@@ -26,7 +26,6 @@ const InsightsScreen = () => {
       <Text style={styles.subtitle}>Here's a quick look at your recent mood trends.</Text>
 
       {/* Chart Placeholder */}
-      <Text style={styles.title}>Your Mood Insights</Text>
       <Text style={styles.subtitle}>Last 7 Days</Text>
 
       <PieChart
