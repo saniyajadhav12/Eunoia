@@ -1,25 +1,39 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { useBuddy } from '../../context/BuddyContext';
 import styles from './ExploreScreen.styles';
+import TipCard from '../../components/TipCard/TipCard';
 
 const ExploreScreen = () => {
-  const { buddy } = useBuddy();
-
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Buddy Debug Info</Text>
-      <Text style={styles.label}>Name:</Text>
-      <Text style={styles.value}>{buddy.name}</Text>
+    <ScrollView style={styles.container}>
+      <Text style={styles.header}>Discover & Feel Better</Text>
 
-      <Text style={styles.label}>Tone:</Text>
-      <Text style={styles.value}>{buddy.tone}</Text>
+      {/* Daily Inspiration */}
+      <Text style={styles.sectionTitle}>🌟 Daily Inspiration</Text>
+      <View style={styles.quoteBox}>
+        <Text style={styles.quoteText}>
+          "Every day may not be good, but there's something good in every day."
+        </Text>
+      </View>
 
-      <Text style={styles.label}>Lifestyle:</Text>
-      <Text style={styles.value}>{buddy.lifestyle}</Text>
+      {/* Mood Boosters */}
+      <Text style={styles.sectionTitle}>🚀 Mood Boosters</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalList}>
+        <TipCard title="Take a short walk 🚶‍♀️" />
+        <TipCard title="Listen to calming music 🎧" />
+        <TipCard title="Breathe deeply for 2 min 🌬️" />
+      </ScrollView>
 
-      <Text style={styles.label}>Reminder Style:</Text>
-      <Text style={styles.value}>{buddy.reminderStyle}</Text>
+      {/* Self-care Tips */}
+      <Text style={styles.sectionTitle}>🛁 Self-care Tips</Text>
+      <TipCard title="Stay hydrated 💧" />
+      <TipCard title="Take screen breaks" />
+      <TipCard title="Connect with a friend 🤝" />
+
+      {/* Journaling Prompts */}
+      <Text style={styles.sectionTitle}>📝 Journaling Prompts</Text>
+      <TipCard title="What made you smile today?" />
+      <TipCard title="One small goal for tomorrow?" />
     </ScrollView>
   );
 };

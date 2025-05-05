@@ -5,25 +5,36 @@ import fonts from '../../theme/fonts';
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
     backgroundColor: colors.background,
     padding: spacing.lg,
-    justifyContent: 'center',
   },
-  title: {
-    fontSize: fonts.sizes.xl,
-    color: colors.primary,
+  header: {
+    fontSize: fonts.sizes.lg,
     fontWeight: 'bold',
-    marginBottom: spacing.lg,
+    color: colors.primary,
+    marginBottom: spacing.md,
   },
-  label: {
-    fontSize: fonts.sizes.sm,
-    color: colors.grey,
-    marginTop: spacing.md,
-  },
-  value: {
+  sectionTitle: {
     fontSize: fonts.sizes.md,
+    fontWeight: '600',
     color: colors.text,
+    marginTop: spacing.lg,
+    marginBottom: spacing.sm,
+  },
+  quoteBox: {
+    backgroundColor: colors.cardBackground,
+    padding: spacing.md,
+    borderRadius: 12,
+    marginBottom: spacing.md,
+  },
+  quoteText: {
+    fontStyle: 'italic',
+    color: colors.textMuted,
+    fontSize: fonts.sizes.sm,
+  },
+  horizontalList: {
+    marginBottom: spacing.lg,
   },
 });
 
