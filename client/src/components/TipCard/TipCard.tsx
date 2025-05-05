@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import {TouchableOpacity, Text} from 'react-native';
 import styles from './TipCard.styles';
 
 type Props = {
+  emoji: string;
   title: string;
 };
 
-const TipCard = ({ title }: Props) => {
+const TipCard = ({emoji, title}: Props) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity activeOpacity={0.8} style={styles.card}>
+      <Text style={styles.emoji}>{emoji}</Text>
       <Text style={styles.text}>{title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

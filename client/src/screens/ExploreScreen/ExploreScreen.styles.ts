@@ -1,9 +1,13 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import colors from '../../theme/colors';
 import spacing from '../../theme/spacing';
 import fonts from '../../theme/fonts';
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -19,13 +23,19 @@ const styles = StyleSheet.create({
     fontSize: fonts.sizes.md,
     fontWeight: '600',
     color: colors.text,
-    marginTop: spacing.lg,
+    marginTop: spacing.md,
     marginBottom: spacing.sm,
   },
   quoteBox: {
     backgroundColor: colors.cardBackground,
     padding: spacing.md,
     borderRadius: 12,
+    borderColor: colors.borderLight, // soft border
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
     marginBottom: spacing.md,
   },
   quoteText: {
@@ -34,7 +44,7 @@ const styles = StyleSheet.create({
     fontSize: fonts.sizes.sm,
   },
   horizontalList: {
-    marginBottom: spacing.lg,
+    marginBottom: spacing.md,
   },
 });
 
