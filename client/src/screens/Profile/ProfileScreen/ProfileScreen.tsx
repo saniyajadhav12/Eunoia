@@ -1,33 +1,42 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from './ProfileScreen.styles';
+import SectionItem from '../../../components/SectionItem/SectionItem';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ProfileStackParamList } from '../../../navigation/ProfileStackNavigator';
-import SectionItem from '../../../components/SectionItem/SectionItem';
 
 const ProfileScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ProfileStackParamList>>();
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {/* Top Greeting Section */}
-      <View style={styles.header}>
-        <View style={styles.avatar}>
-          <Text style={styles.avatarText}>L</Text>
-        </View>
-        <View>
-          <Text style={styles.name}>Hi Lumi 👋</Text>
-          <Text style={styles.email}>you@eunoia.app</Text>
-        </View>
-      </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>Your Profile</Text>
 
-      {/* Section List */}
-      <SectionItem label="Mood History" icon="calendar" onPress={() => navigation.navigate('MoodHistory')} />
-      <SectionItem label="Insights" icon="bar-chart" onPress={() => navigation.navigate('Insights')} />
-      <SectionItem label="Settings" icon="settings" onPress={() => navigation.navigate('Settings')} />
-      <SectionItem label="About" icon="information-circle-sharp" onPress={() => navigation.navigate('About')} />
-    </ScrollView>
+      <SectionItem 
+        icon="calendar" 
+        label="Mood History" 
+        onPress={() => navigation.navigate('MoodHistory')} 
+      />
+
+      <SectionItem 
+        icon="pie-chart" 
+        label="Insights" 
+        onPress={() => navigation.navigate('Insights')} 
+      />
+
+      <SectionItem 
+        icon="settings" 
+        label="Settings" 
+        onPress={() => navigation.navigate('Settings')} 
+      />
+
+      <SectionItem 
+        icon="information-circle-sharp" 
+        label="About App" 
+        onPress={() => navigation.navigate('About')} 
+      />
+    </View>
   );
 };
 

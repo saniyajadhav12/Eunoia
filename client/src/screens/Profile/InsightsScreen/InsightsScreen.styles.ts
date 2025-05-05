@@ -6,42 +6,30 @@ import fonts from '../../../theme/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: spacing.lg,
     backgroundColor: colors.background,
+    padding: spacing.lg,
   },
   title: {
     fontSize: fonts.sizes.lg,
     fontWeight: 'bold',
-    color: colors.text,
+    color: colors.primary,
     marginBottom: spacing.sm,
   },
   subtitle: {
-    fontSize: fonts.sizes.sm,
-    color: colors.grey,
-    marginBottom: spacing.lg,
-  },
-  chartBox: {
-    backgroundColor: colors.cardBackground,
-    padding: spacing.xl,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: spacing.lg,
-  },
-  chartText: {
-    fontSize: fonts.sizes.sm,
-    color: colors.grey,
+    fontSize: fonts.sizes.md,
+    color: colors.text,
+    marginBottom: spacing.md,
   },
   summaryRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: spacing.sm,
+    marginTop: spacing.lg,
   },
   summaryBox: {
-    flex: 1,
     backgroundColor: colors.cardBackground,
-    padding: spacing.lg,
+    padding: spacing.md,
     borderRadius: 12,
+    width: '48%',
     alignItems: 'center',
   },
   summaryLabel: {
@@ -50,7 +38,9 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   summaryValue: {
-    fontSize: 24,
+    fontSize: fonts.sizes.lg,
+    fontWeight: 'bold',
+    color: colors.primary,
   },
 });
 
