@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from './SignupScreen.styles';
@@ -7,11 +7,14 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/RootNavigator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { signup } from '../../services/FirebaseAuthService';
 
 const SignupScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const SignupSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
@@ -21,6 +24,21 @@ const SignupScreen = () => {
       .required('Required'),
   });
 
+  const handleSignup = async (values: { email: string; password: string }) => {
+    setLoading(true);
+    setErrorMsg('');
+    try {
+      await signup(values.email, values.password);
+      console.log('Signup successful');
+      navigation.navigate('MainTabs');
+    } catch (error: any) {
+      console.error('Signup failed', error.message);
+      setErrorMsg(error.message || 'Signup failed. Try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
@@ -29,10 +47,7 @@ const SignupScreen = () => {
       <Formik
         initialValues={{ email: '', password: '', confirmPassword: '' }}
         validationSchema={SignupSchema}
-        onSubmit={values => {
-          console.log('Signing up with:', values);
-          // 🔐 Firebase signup will go here later
-        }}
+        onSubmit={handleSignup}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <>
@@ -104,10 +119,14 @@ const SignupScreen = () => {
                 styles.button,
                 !(values.email && values.password && values.confirmPassword) && styles.buttonDisabled,
               ]}
-              onPress={() => navigation.navigate('MainTabs')}
+              onPress={handleSubmit as any}
               disabled={!(values.email && values.password && values.confirmPassword)}
             >
-              <Text style={styles.buttonText}>Sign Up</Text>
+              {loading ? (
+                <ActivityIndicator color="#fff" />
+              ) : (
+                <Text style={styles.buttonText}>Sign Up</Text>
+              )}
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>

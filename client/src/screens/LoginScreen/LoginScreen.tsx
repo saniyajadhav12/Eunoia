@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from './LoginScreen.styles';
@@ -7,15 +7,33 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/RootNavigator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { login } from '../../services/FirebaseAuthService';
 
 const LoginScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
     password: Yup.string().min(6, 'Too Short!').required('Required'),
   });
+
+  const handleLogin = async (values: { email: string; password: string }) => {
+    setLoading(true);
+    setErrorMsg('');
+    try {
+      await login(values.email, values.password);
+      console.log('Login successful');
+      navigation.navigate('MainTabs');
+    } catch (error: any) {
+      console.error('Login failed', error.message);
+      setErrorMsg(error.message || 'Login failed. Try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -25,10 +43,7 @@ const LoginScreen = () => {
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={LoginSchema}
-        onSubmit={values => {
-          console.log('Logging in with:', values);
-          // 🔐 Firebase login logic here
-        }}
+        onSubmit={handleLogin}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <>
@@ -81,10 +96,14 @@ const LoginScreen = () => {
                 styles.button,
                 !(values.email && values.password) && styles.buttonDisabled,
               ]}
-              onPress={() => navigation.navigate('MainTabs')}
+              onPress={handleSubmit as any}
               disabled={!(values.email && values.password)}
             >
-              <Text style={styles.buttonText}>Login</Text>
+              {loading ? (
+                <ActivityIndicator color="#fff" />
+              ) : (
+                <Text style={styles.buttonText}>Login</Text>
+              )}
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate('Signup')}>

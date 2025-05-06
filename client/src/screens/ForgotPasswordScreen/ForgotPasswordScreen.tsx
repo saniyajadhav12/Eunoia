@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from './ForgotPasswordScreen.styles';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/RootNavigator';
+import { resetPassword } from '../../services/FirebaseAuthService';
+
 
 const ForgotPasswordScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [loading, setLoading] = useState(false);
+  const [successMsg, setSuccessMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const ForgotPasswordSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
   });
+
+  const handleForgotPassword = async (values: { email: string }) => {
+    setLoading(true);
+    setErrorMsg('');
+    setSuccessMsg('');
+    try {
+      await resetPassword(values.email);
+      setSuccessMsg('Reset link sent! Check your email.');
+    } catch (error: any) {
+      console.error('Reset failed', error.message);
+      setErrorMsg(error.message || 'Failed to send reset link.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -24,10 +44,7 @@ const ForgotPasswordScreen = () => {
       <Formik
         initialValues={{ email: '' }}
         validationSchema={ForgotPasswordSchema}
-        onSubmit={values => {
-          console.log('Reset password for:', values.email);
-          // 🔐 Firebase password reset logic will go here later
-        }}
+        onSubmit={handleForgotPassword}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <>
@@ -52,7 +69,11 @@ const ForgotPasswordScreen = () => {
               onPress={handleSubmit as any}
               disabled={!values.email}
             >
-              <Text style={styles.buttonText}>Send Reset Link</Text>
+              {loading ? (
+                <ActivityIndicator color="#fff" />
+              ) : (
+                <Text style={styles.buttonText}>Send Reset Link</Text>
+              )}
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
