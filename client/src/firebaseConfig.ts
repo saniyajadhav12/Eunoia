@@ -1,4 +1,8 @@
+import 'react-native-get-random-values';
+import 'expo-modules-core';
+
 import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBm8_U5ElZc0Q_EHW2-_jp8BJpxB_ST7gA",
@@ -10,7 +14,4 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-
-import { getAuth } from 'firebase/auth';
-
 export const auth = getAuth(app);

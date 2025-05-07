@@ -30,7 +30,7 @@ const SignupScreen = () => {
     try {
       await signup(values.email, values.password);
       console.log('Signup successful');
-      navigation.navigate('MainTabs');
+      // navigation.navigate('MainTabs');
     } catch (error: any) {
       console.error('Signup failed', error.message);
       setErrorMsg(error.message || 'Signup failed. Try again.');

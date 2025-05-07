@@ -26,7 +26,7 @@ const LoginScreen = () => {
     try {
       await login(values.email, values.password);
       console.log('Login successful');
-      navigation.navigate('MainTabs');
+      // navigation.navigate('MainTabs');
     } catch (error: any) {
       console.error('Login failed', error.message);
       setErrorMsg(error.message || 'Login failed. Try again.');
