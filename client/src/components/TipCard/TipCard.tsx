@@ -5,14 +5,17 @@ import styles from './TipCard.styles';
 type Props = {
   emoji: string;
   title: string;
+  onPress?: () => void;
 };
 
-const TipCard = ({emoji, title}: Props) => {
+const TipCard = ({emoji, title, onPress}: Props) => {
   return (
-    <View style={styles.card}>
-      <Text style={styles.emoji}>{emoji}</Text>
-      <Text style={styles.title}>{title}</Text>
-    </View>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+      <View style={styles.card}>
+        <Text style={styles.emoji}>{emoji}</Text>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

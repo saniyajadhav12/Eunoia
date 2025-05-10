@@ -37,9 +37,14 @@ const ExploreScreen = () => {
           style={styles.horizontalList}>
           <TipCard emoji="🚶‍♀️" title="Take a short walk" />
           <TipCard emoji="🎧" title="Listen to calming music" />
-          <TouchableOpacity onPress={() =>{ console.log("Breathe card tapped"); setShowBreathing(true)}}>
-            <TipCard emoji="🌬️" title="Breathe deeply for 2 min" />
-          </TouchableOpacity>
+          <TipCard
+            emoji="🌬️"
+            title="Breathe deeply for 2 min"
+            onPress={() => {
+              console.log("Breathe card tapped");
+              setShowBreathing(true);
+            }}
+          />
         </ScrollView>
 
         {/* Self-care Tips */}
