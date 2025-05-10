@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text} from 'react-native';
+import {TouchableOpacity, Text, View} from 'react-native';
 import styles from './TipCard.styles';
 
 type Props = {
@@ -9,10 +9,10 @@ type Props = {
 
 const TipCard = ({emoji, title}: Props) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} style={styles.card}>
+    <View style={styles.card}>
       <Text style={styles.emoji}>{emoji}</Text>
       <Text style={styles.title}>{title}</Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 

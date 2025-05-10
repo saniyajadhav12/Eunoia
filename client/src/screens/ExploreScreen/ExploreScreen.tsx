@@ -1,11 +1,12 @@
-import React from 'react';
-import {View, Text, ScrollView, } from 'react-native';
+import React, { useState } from 'react';
+import {View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import styles from './ExploreScreen.styles';
 import TipCard from '../../components/TipCard/TipCard';
+import BreathingModal from '../../components/BreathingModal/BreathingModal'; // <-- new modal component
 
 const ExploreScreen = () => {
+  const [showBreathing, setShowBreathing] = useState(false);
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.container}>
@@ -36,7 +37,9 @@ const ExploreScreen = () => {
           style={styles.horizontalList}>
           <TipCard emoji="🚶‍♀️" title="Take a short walk" />
           <TipCard emoji="🎧" title="Listen to calming music" />
-          <TipCard emoji="🌬️" title="Breathe deeply for 2 min" />
+          <TouchableOpacity onPress={() =>{ console.log("Breathe card tapped"); setShowBreathing(true)}}>
+            <TipCard emoji="🌬️" title="Breathe deeply for 2 min" />
+          </TouchableOpacity>
         </ScrollView>
 
         {/* Self-care Tips */}
@@ -72,6 +75,7 @@ const ExploreScreen = () => {
         </ScrollView>
 
       </ScrollView>
+      <BreathingModal visible={showBreathing} onClose={() => setShowBreathing(false)} />
     </SafeAreaView>
   );
 };
