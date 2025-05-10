@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import colors from '../../theme/colors';
 import spacing from '../../theme/spacing';
 import fonts from '../../theme/fonts';
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: colors.background,
     padding: spacing.lg,
   },
@@ -32,11 +32,18 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderColor: colors.borderLight, // soft border
     borderWidth: 1,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
     marginBottom: spacing.md,
+    ...Platform.select({
+      android: {
+        elevation: 2,
+      },
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 1},
+        shadowOpacity: 0.05,
+        shadowRadius: 2,
+      },
+    }),
   },
   quoteText: {
     fontStyle: 'italic',
@@ -53,6 +60,17 @@ const styles = StyleSheet.create({
     borderColor: colors.borderLight,
     borderWidth: 1,
     marginBottom: spacing.md,
+    ...Platform.select({
+      android: {
+        elevation: 2,
+      },
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 1},
+        shadowOpacity: 0.05,
+        shadowRadius: 2,
+      },
+    }),
   },
   affirmationText: {
       fontSize: fonts.sizes.sm,

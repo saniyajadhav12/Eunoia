@@ -1,5 +1,7 @@
 import React from 'react';
-import {View, Text, ScrollView, SafeAreaView} from 'react-native';
+import {View, Text, ScrollView, } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import styles from './ExploreScreen.styles';
 import TipCard from '../../components/TipCard/TipCard';
 
