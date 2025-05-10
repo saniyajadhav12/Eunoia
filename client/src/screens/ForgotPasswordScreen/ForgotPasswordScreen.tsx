@@ -6,7 +6,7 @@ import styles from './ForgotPasswordScreen.styles';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/RootNavigator';
-import { resetPassword } from '../../services/FirebaseAuthService';
+// import { resetPassword } from '../../firebase/auth';
 
 
 const ForgotPasswordScreen = () => {
@@ -24,7 +24,7 @@ const ForgotPasswordScreen = () => {
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      await resetPassword(values.email);
+      // await resetPassword(values.email);
       setSuccessMsg('Reset link sent! Check your email.');
     } catch (error: any) {
       console.error('Reset failed', error.message);

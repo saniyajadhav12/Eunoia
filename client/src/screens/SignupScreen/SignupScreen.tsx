@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/RootNavigator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { signup } from '../../services/FirebaseAuthService';
+// import { signup } from '../../firebase/auth';
 
 const SignupScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -28,7 +28,7 @@ const SignupScreen = () => {
     setLoading(true);
     setErrorMsg('');
     try {
-      await signup(values.email, values.password);
+      // await signup(values.email, values.password);
       console.log('Signup successful');
       // navigation.navigate('MainTabs');
     } catch (error: any) {
