@@ -5,11 +5,13 @@ import InsightsScreen from '../screens/Profile/InsightsScreen/InsightsScreen';
 import MoodHistoryScreen from '../screens/Profile/MoodHistoryScreen/MoodHistoryScreen';
 import ProfileScreen from '../screens/Profile/ProfileScreen/ProfileScreen';
 import SettingsScreen from '../screens/Profile/SettingsScreen/SettingsScreen';
+import WalkHistoryScreen from '../screens/WalkHistoryScreen/WalkHistoryScreen';
 
 export type ProfileStackParamList = {
   Profile: undefined;
   MoodHistory: undefined;
   Insights: undefined;
+  WalkHistory: undefined;
   Settings: undefined;
   About: undefined;
 };
@@ -43,6 +45,11 @@ const ProfileStackNavigator = () => {
         name="Insights"
         component={InsightsScreen}
         options={{title: 'Insights'}}
+      />
+      <Stack.Screen
+        name="WalkHistory"
+        component={WalkHistoryScreen}
+        options={{title: 'WalkHistory'}}
       />
       <Stack.Screen
         name="Settings"

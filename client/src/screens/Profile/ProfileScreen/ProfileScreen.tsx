@@ -24,6 +24,11 @@ const ProfileScreen = () => {
         label="Insights" 
         onPress={() => navigation.navigate('Insights')} 
       />
+      <SectionItem 
+        icon="pie-chart" 
+        label="Walk History" 
+        onPress={() => navigation.navigate('WalkHistory')} 
+      />
 
       <SectionItem 
         icon="settings" 

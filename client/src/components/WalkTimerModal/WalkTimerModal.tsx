@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Modal, View, Text, TouchableOpacity } from 'react-native';
 import styles from './WalkTimerModal.styles';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import Video from 'react-native-video';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface WalkTimerModalProps {
   visible: boolean;
@@ -15,26 +16,59 @@ const WalkTimerModal: React.FC<WalkTimerModalProps> = ({ visible, onClose }) => 
   const [isCompleted, setIsCompleted] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [playSound, setPlaySound] = useState(false);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const timerStartRef = useRef<Date | null>(null);
 
   useEffect(() => {
     if (visible) {
       setIsCompleted(false);
+      setShowConfetti(false);
       setPlaySound(false);
+      timerStartRef.current = new Date();
     }
   }, [visible]);
+
+  const saveWalkSession = async (duration: number, completed: boolean) => {
+    const session = {
+      timestamp: new Date().toISOString(),
+      duration,
+      completed,
+    };
+
+    try {
+      const prev = await AsyncStorage.getItem('walkLog');
+      const log = prev ? JSON.parse(prev) : [];
+      log.push(session);
+      await AsyncStorage.setItem('walkLog', JSON.stringify(log));
+    } catch (err) {
+      console.error('Error saving walk session:', err);
+    }
+  };
 
   const handleCompletion = () => {
     ReactNativeHapticFeedback.trigger('notificationSuccess', {
       enableVibrateFallback: true,
       ignoreAndroidSystemSettings: false,
     });
+
+    saveWalkSession(5, true); // 5 minutes = complete
     setShowConfetti(true);
-    setIsCompleted(true);
     setPlaySound(true);
+    setIsCompleted(true);
     setTimeout(() => {
       setShowConfetti(false);
       onClose();
     }, 3500);
+  };
+
+  const handleEndEarly = () => {
+    if (!timerStartRef.current) return;
+    const elapsed = Math.floor((new Date().getTime() - timerStartRef.current.getTime()) / 1000);
+    const minutes = Math.max(1, Math.ceil(elapsed / 60));
+    const completed = elapsed >= 300;
+
+    saveWalkSession(minutes, completed);
+    onClose();
   };
 
   return (
@@ -49,6 +83,9 @@ const WalkTimerModal: React.FC<WalkTimerModalProps> = ({ visible, onClose }) => 
               duration={300}
               colors={['#BFA2DB', '#A1C6EA', '#7FB77E']}
               colorsTime={[300, 180, 0]}
+              onUpdate={(remainingTime) => {
+                setElapsedSeconds(300 - remainingTime);
+              }}
               onComplete={() => {
                 handleCompletion();
                 return { shouldRepeat: false };
@@ -71,7 +108,7 @@ const WalkTimerModal: React.FC<WalkTimerModalProps> = ({ visible, onClose }) => 
               Take a few deep breaths and enjoy your steps.
             </Text>
 
-            <TouchableOpacity style={styles.button} onPress={onClose}>
+            <TouchableOpacity style={styles.button} onPress={handleEndEarly}>
               <Text style={styles.buttonText}>End Early</Text>
             </TouchableOpacity>
           </>
@@ -85,13 +122,11 @@ const WalkTimerModal: React.FC<WalkTimerModalProps> = ({ visible, onClose }) => 
           </>
         )}
 
-        {/* Sound using react-native-video */}
         {playSound && (
           <Video
             source={require('../../assets/sounds/timer-end.mp3')}
             paused={false}
             repeat={false}
-            // audioOnly
             playInBackground
             ignoreSilentSwitch="ignore"
             onEnd={() => setPlaySound(false)}
