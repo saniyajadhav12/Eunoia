@@ -4,10 +4,14 @@ import spacing from '../../../theme/spacing';
 import fonts from '../../../theme/fonts';
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: colors.background,
-    padding: spacing.lg,
+  },
+  container: {
+    // flex: 1,
+    backgroundColor: colors.background,
+    padding: spacing.lg/4,
   },
   title: {
     fontSize: fonts.sizes.lg,
