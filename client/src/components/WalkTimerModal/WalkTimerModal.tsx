@@ -16,7 +16,7 @@ const WalkTimerModal: React.FC<WalkTimerModalProps> = ({ visible, onClose }) => 
   const [isCompleted, setIsCompleted] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [playSound, setPlaySound] = useState(false);
-  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+//   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const timerStartRef = useRef<Date | null>(null);
 
   useEffect(() => {
@@ -28,10 +28,10 @@ const WalkTimerModal: React.FC<WalkTimerModalProps> = ({ visible, onClose }) => 
     }
   }, [visible]);
 
-  const saveWalkSession = async (duration: number, completed: boolean) => {
+  const saveWalkSession = async (durationInSeconds: number, completed: boolean) => {
     const session = {
       timestamp: new Date().toISOString(),
-      duration,
+      duration: durationInSeconds,
       completed,
     };
 
@@ -51,7 +51,7 @@ const WalkTimerModal: React.FC<WalkTimerModalProps> = ({ visible, onClose }) => 
       ignoreAndroidSystemSettings: false,
     });
 
-    saveWalkSession(5, true); // 5 minutes = complete
+    saveWalkSession(300, true); // 5 mins = 300 seconds
     setShowConfetti(true);
     setPlaySound(true);
     setIsCompleted(true);
@@ -60,14 +60,14 @@ const WalkTimerModal: React.FC<WalkTimerModalProps> = ({ visible, onClose }) => 
       onClose();
     }, 3500);
   };
+  
 
   const handleEndEarly = () => {
     if (!timerStartRef.current) return;
     const elapsed = Math.floor((new Date().getTime() - timerStartRef.current.getTime()) / 1000);
-    const minutes = Math.max(1, Math.ceil(elapsed / 60));
-    const completed = elapsed >= 300;
+    const completed = elapsed >= 295;
 
-    saveWalkSession(minutes, completed);
+    saveWalkSession(elapsed, completed);
     onClose();
   };
 
@@ -83,9 +83,6 @@ const WalkTimerModal: React.FC<WalkTimerModalProps> = ({ visible, onClose }) => 
               duration={300}
               colors={['#BFA2DB', '#A1C6EA', '#7FB77E']}
               colorsTime={[300, 180, 0]}
-              onUpdate={(remainingTime) => {
-                setElapsedSeconds(300 - remainingTime);
-              }}
               onComplete={() => {
                 handleCompletion();
                 return { shouldRepeat: false };

@@ -40,7 +40,8 @@ const WalkHistoryScreen = () => {
               {new Date(entry.timestamp).toLocaleString()}
             </Text>
             <Text style={[styles.status, entry.completed ? styles.completed : styles.early]}>
-              {entry.completed ? '✅ Completed' : '⚠️ Ended Early'} – {entry.duration} min
+            {entry.completed ? '✅ Completed' : '⚠️ Ended Early'} –{' '}
+            {Math.floor(entry.duration / 60)} min {entry.duration % 60}s
             </Text>
           </View>
         ))}
