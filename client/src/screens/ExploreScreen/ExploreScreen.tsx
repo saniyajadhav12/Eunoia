@@ -4,9 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './ExploreScreen.styles';
 import TipCard from '../../components/TipCard/TipCard';
 import BreathingModal from '../../components/BreathingModal/BreathingModal'; // <-- new modal component
+import WalkTimerModal from '../../components/WalkTimerModal/WalkTimerModal';
 
 const ExploreScreen = () => {
   const [showBreathing, setShowBreathing] = useState(false);
+  const [showWalkTimer, setShowWalkTimer] = useState(false);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.container}>
@@ -35,7 +38,11 @@ const ExploreScreen = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           style={styles.horizontalList}>
-          <TipCard emoji="🚶‍♀️" title="Take a short walk" />
+          <TipCard
+            emoji="🚶‍♀️"
+            title="Take a short walk"
+            onPress={() => setShowWalkTimer(true)}
+          />
           <TipCard emoji="🎧" title="Listen to calming music" />
           <TipCard
             emoji="🌬️"
@@ -80,6 +87,7 @@ const ExploreScreen = () => {
         </ScrollView>
 
       </ScrollView>
+      <WalkTimerModal visible={showWalkTimer} onClose={() => setShowWalkTimer(false)} />
       <BreathingModal visible={showBreathing} onClose={() => setShowBreathing(false)} />
     </SafeAreaView>
   );
