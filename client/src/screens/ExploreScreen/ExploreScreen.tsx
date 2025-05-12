@@ -9,6 +9,7 @@ import CalmingMusicModal from '../../components/CalmingMusicModal/CalmingMusicMo
 import HydrationTipModal from '../../components/HydrationTipModal/HydrationTipModal';
 import ScreenBreakModal from '../../components/ScreenBreakModal/ScreenBreakModal';
 import ConnectFriendModal from '../../components/ConnectFriendModal/ConnectFriendModal';
+import JournalPromptModal from '../../components/JournalPromptModal/JournalPromptModal';
 
 const ExploreScreen = () => {
   const [showBreathing, setShowBreathing] = useState(false);
@@ -17,6 +18,8 @@ const ExploreScreen = () => {
   const [showHydration, setShowHydration] = useState(false);
   const [showScreenBreak, setShowScreenBreak] = useState(false);
   const [showConnect, setShowConnect] = useState(false);
+  const [showJournalPrompt, setShowJournalPrompt] = useState(false);
+  const [selectedPrompt, setSelectedPrompt] = useState('');
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -96,8 +99,22 @@ const ExploreScreen = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           style={styles.horizontalList}>
-          <TipCard emoji="😊" title="What made you smile today?" />
-          <TipCard emoji="🎯" title="One small goal for tomorrow?" />
+          <TipCard
+            emoji="😊"
+            title="What made you smile today?"
+            onPress={() => {
+              setSelectedPrompt("What made you smile today?");
+              setShowJournalPrompt(true);
+            }}
+          />
+          <TipCard
+            emoji="🎯"
+            title="One small goal for tomorrow?"
+            onPress={() => {
+              setSelectedPrompt("One small goal for tomorrow?");
+              setShowJournalPrompt(true);
+            }}
+          />
         </ScrollView>
 
         {/* Soothing Sounds */}
@@ -118,6 +135,8 @@ const ExploreScreen = () => {
       <HydrationTipModal visible={showHydration} onClose={() => setShowHydration(false)} />
       <ScreenBreakModal visible={showScreenBreak} onClose={() => setShowScreenBreak(false)} />
       <ConnectFriendModal visible={showConnect} onClose={() => setShowConnect(false)} />
+      <JournalPromptModal visible={showJournalPrompt} prompt={selectedPrompt} onClose={() => setShowJournalPrompt(false)} />
+
     </SafeAreaView>
   );
 };

@@ -24,10 +24,17 @@ const ProfileScreen = () => {
         label="Insights" 
         onPress={() => navigation.navigate('Insights')} 
       />
+
       <SectionItem 
-        icon="pie-chart" 
+        icon="walk-sharp" 
         label="Walk History" 
         onPress={() => navigation.navigate('WalkHistory')} 
+      />
+
+      <SectionItem 
+        icon="journal-sharp" 
+        label="JournalHistory" 
+        onPress={() => navigation.navigate('JournalHistory')} 
       />
 
       <SectionItem 
