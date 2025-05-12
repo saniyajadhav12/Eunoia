@@ -19,22 +19,40 @@ export default StyleSheet.create({
     marginBottom: 12,
   },
   input: {
+    minHeight: 100,
+    backgroundColor: '#f9f9f9',
+    borderColor: '#ddd',
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 10,
-    padding: 10,
-    height: 100,
-    marginBottom: 16,
+    borderRadius: 12,
+    padding: 12,
     textAlignVertical: 'top',
+    marginBottom: 16,
   },
   button: {
     backgroundColor: '#A78BFA',
-    padding: 12,
+    paddingVertical: 12,
     borderRadius: 10,
+    alignItems: 'center',
+  },
+  buttonDisabled: {
+    backgroundColor: '#ccc',
   },
   buttonText: {
     color: '#fff',
-    textAlign: 'center',
+    fontWeight: '600',
+  },
+  buttonTextDisabled: {
+    color: '#666',
+  },
+  closeButton: {
+    backgroundColor: '#eee',
+    paddingVertical: 12,
+    borderRadius: 10,
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  closeButtonText: {
+    color: '#333',
     fontWeight: '600',
   },
 });

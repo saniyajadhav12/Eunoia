@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import RootNavigator from './src/navigation/RootNavigator';
 import MainTabs from './src/navigation/MainTabs';
 import { BuddyProvider } from './src/context/BuddyContext';
+import Toast from 'react-native-toast-message';
 
 const App = () => {
   const [user, setUser] = useState(true);
@@ -14,6 +15,7 @@ const App = () => {
         <NavigationContainer>
           {user ? <MainTabs /> : <RootNavigator />}
         </NavigationContainer>
+        <Toast />
       </BuddyProvider>
     </SafeAreaProvider>
   );

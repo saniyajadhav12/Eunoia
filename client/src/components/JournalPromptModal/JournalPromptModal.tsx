@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import {
+  Modal,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import styles from './JournalPromptModal.styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -37,6 +44,7 @@ const JournalPromptModal: React.FC<Props> = ({ visible, prompt, onClose }) => {
       <View style={styles.overlay}>
         <View style={styles.box}>
           <Text style={styles.prompt}>{prompt}</Text>
+
           <TextInput
             value={entry}
             onChangeText={setEntry}
@@ -44,18 +52,33 @@ const JournalPromptModal: React.FC<Props> = ({ visible, prompt, onClose }) => {
             multiline
             style={styles.input}
           />
-          <TouchableOpacity style={styles.button} onPress={handleSave}>
-            <Text style={styles.buttonText}>Save</Text>
+
+          <TouchableOpacity
+            style={[
+              styles.button,
+              !entry.trim() && styles.buttonDisabled,
+            ]}
+            onPress={handleSave}
+            disabled={!entry.trim()}
+          >
+            <Text
+              style={[
+                styles.buttonText,
+                !entry.trim() && styles.buttonTextDisabled,
+              ]}
+            >
+              Save
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.button, { backgroundColor: '#ccc', marginTop: 10 }]}
+            style={styles.closeButton}
             onPress={() => {
-                setEntry('');
-                onClose();
+              setEntry('');
+              onClose();
             }}
-            >
-            <Text style={[styles.buttonText, { color: '#333' }]}>Close</Text>
+          >
+            <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
         </View>
       </View>
