@@ -5,10 +5,12 @@ import styles from './ExploreScreen.styles';
 import TipCard from '../../components/TipCard/TipCard';
 import BreathingModal from '../../components/BreathingModal/BreathingModal'; // <-- new modal component
 import WalkTimerModal from '../../components/WalkTimerModal/WalkTimerModal';
+import CalmingMusicModal from '../../components/CalmingMusicModal/CalmingMusicModal';
 
 const ExploreScreen = () => {
   const [showBreathing, setShowBreathing] = useState(false);
   const [showWalkTimer, setShowWalkTimer] = useState(false);
+  const [showMusic, setShowMusic] = useState(false);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -43,7 +45,11 @@ const ExploreScreen = () => {
             title="Take a short walk"
             onPress={() => setShowWalkTimer(true)}
           />
-          <TipCard emoji="🎧" title="Listen to calming music" />
+          <TipCard 
+            emoji="🎧" 
+            title="Listen to calming music" 
+            onPress={() => setShowMusic(true)} 
+          />
           <TipCard
             emoji="🌬️"
             title="Breathe deeply for 2 min"
@@ -88,6 +94,7 @@ const ExploreScreen = () => {
 
       </ScrollView>
       <WalkTimerModal visible={showWalkTimer} onClose={() => setShowWalkTimer(false)} />
+      <CalmingMusicModal visible={showMusic} onClose={() => setShowMusic(false)} />
       <BreathingModal visible={showBreathing} onClose={() => setShowBreathing(false)} />
     </SafeAreaView>
   );
