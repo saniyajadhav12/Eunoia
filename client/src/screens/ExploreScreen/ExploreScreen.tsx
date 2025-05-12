@@ -6,11 +6,17 @@ import TipCard from '../../components/TipCard/TipCard';
 import BreathingModal from '../../components/BreathingModal/BreathingModal'; // <-- new modal component
 import WalkTimerModal from '../../components/WalkTimerModal/WalkTimerModal';
 import CalmingMusicModal from '../../components/CalmingMusicModal/CalmingMusicModal';
+import HydrationTipModal from '../../components/HydrationTipModal/HydrationTipModal';
+import ScreenBreakModal from '../../components/ScreenBreakModal/ScreenBreakModal';
+import ConnectFriendModal from '../../components/ConnectFriendModal/ConnectFriendModal';
 
 const ExploreScreen = () => {
   const [showBreathing, setShowBreathing] = useState(false);
   const [showWalkTimer, setShowWalkTimer] = useState(false);
   const [showMusic, setShowMusic] = useState(false);
+  const [showHydration, setShowHydration] = useState(false);
+  const [showScreenBreak, setShowScreenBreak] = useState(false);
+  const [showConnect, setShowConnect] = useState(false);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -66,9 +72,22 @@ const ExploreScreen = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           style={styles.horizontalList}>
-          <TipCard emoji="💧" title="Stay hydrated" />
-          <TipCard emoji="💻" title="Take screen breaks" />
-          <TipCard emoji="🤝" title="Connect with a friend" />
+          <TipCard 
+            emoji="💧" 
+            title="Stay hydrated" 
+            onPress={() => setShowHydration(true)} 
+          />
+          <TipCard 
+            emoji="💻" 
+            title="Take screen breaks" 
+            onPress={() => setShowScreenBreak(true)} 
+          />
+          <TipCard 
+            emoji="🤝" 
+            title="Connect with a friend" 
+            onPress={() => setShowConnect(true)} 
+          />
+
         </ScrollView>
 
         {/* Journaling Prompts */}
@@ -96,6 +115,9 @@ const ExploreScreen = () => {
       <WalkTimerModal visible={showWalkTimer} onClose={() => setShowWalkTimer(false)} />
       <CalmingMusicModal visible={showMusic} onClose={() => setShowMusic(false)} />
       <BreathingModal visible={showBreathing} onClose={() => setShowBreathing(false)} />
+      <HydrationTipModal visible={showHydration} onClose={() => setShowHydration(false)} />
+      <ScreenBreakModal visible={showScreenBreak} onClose={() => setShowScreenBreak(false)} />
+      <ConnectFriendModal visible={showConnect} onClose={() => setShowConnect(false)} />
     </SafeAreaView>
   );
 };
