@@ -1829,6 +1829,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNCPushNotificationIOS (1.11.0):
+    - React-Core
   - RNGestureHandler (2.25.0):
     - DoubleConversion
     - glog
@@ -2209,6 +2211,7 @@ DEPENDENCIES:
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -2370,6 +2373,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNCPushNotificationIOS:
+    :path: "../node_modules/@react-native-community/push-notification-ios"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReactNativeHapticFeedback:
@@ -2461,6 +2466,7 @@ SPEC CHECKSUMS:
   ReactCodegen: 86758c0e13c6b245ff0cd7123cc5e8910d67546a
   ReactCommon: aa48e4fddbc6a0afa19dca39a1b6016c150b5db4
   RNCAsyncStorage: 39c42c1e478e1f5166d1db52b5055e090e85ad66
+  RNCPushNotificationIOS: 6c4ca3388c7434e4a662b92e4dfeeee858e6f440
   RNGestureHandler: ebef699ea17e7c0006c1074e1e423ead60ce0121
   RNReactNativeHapticFeedback: 851adf794e1fcdc0664d80820fa3272ee8a6a538
   RNReanimated: 2313402fe27fecb7237619e9c6fcee3177f08a65
